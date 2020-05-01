@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -30,16 +31,15 @@ namespace xml_presenter_webapp.Controllers
             System.Console.WriteLine("hello there!");
 
 
-// Create the text file.  
-string csvString = @"GREAL,Great Lakes Food Market,Howard Snyder,Marketing Manager,(503) 555-7555,2732 Baker Blvd.,Eugene,OR,97403,USA  
-HUNGC,Hungry Coyote Import Store,Yoshi Latimer,Sales Representative,(503) 555-6874,City Center Plaza 516 Main St.,Elgin,OR,97827,USA  
-LAZYK,Lazy K Kountry Store,John Steel,Marketing Manager,(509) 555-7969,12 Orchestra Terrace,Walla Walla,WA,99362,USA  
-LETSS,Let's Stop N Shop,Jaime Yorres,Owner,(415) 555-5938,87 Polk St. Suite 5,San Francisco,CA,94117,USA";  
-System.IO.File.WriteAllText("cust.csv", csvString);  
+//FileInfo[] as = dinfo.GetFiles("*.txt"); 
+string[] txtfiles = Directory.GetFiles("db", "*.txt");
   
 // Read into an array of strings.  
-string[] source = System.IO.File.ReadAllLines("Order1.txt");  
-
+List<string> source = new List<string>();
+ 
+foreach(string file in txtfiles) { 
+    source.AddRange(System.IO.File.ReadAllLines(file));  
+}
 string[] modifiedSource = source.Skip(8).ToArray();
 XElement cust = new System.Xml.Linq.XElement("Orders",  
     from str in source  
@@ -64,10 +64,10 @@ XElement cust = new System.Xml.Linq.XElement("Orders",
 //     Console.WriteLine(n);
 // }}
 
+//remove rows
 cust.Elements().ToArray()[0].Remove();
 
 System.Console.WriteLine(cust);
-// System.IO.File.WriteAllText("order1.xml", cust);  
 
 
 
