@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,11 +15,6 @@ namespace xml_presenter_webapp.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -26,7 +23,7 @@ namespace xml_presenter_webapp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<Order> Get()
         {
             //find files
             string[] txtfiles = Directory.GetFiles("db", "*.txt");
@@ -62,7 +59,60 @@ namespace xml_presenter_webapp.Controllers
                 )  
             );
 
-            return cust;
+
+            //save xml to disk
+            const string filePath = "db/orders.xml";
+            cust.Save(filePath);
+
+            //var orders = Serialization<OrderDTO>.DeserializeFromXmlFile(filePath);
+
+            //load xml from disk
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+
+            //xml to string
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tx = new XmlTextWriter(sw);
+            doc.WriteTo(tx);
+
+            //remove xml tag
+            string xmlstr = sw.ToString();
+            const int xmlTagLength = 38;
+            string xmlString = xmlstr.Substring(xmlTagLength, xmlstr.Length-xmlTagLength);
+
+
+
+           // System.Console.WriteLine(xmlstr);
+
+           // var xmlString = System.IO.File.ReadAllLines(filePath);
+
+            //string xmlString = "<Products><Product><Id>1</Id><Name>My XML product</Name></Product><Product><Id>2</Id><Name>My second product</Name></Product></Products>";
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("Orders"));
+
+            StringReader stringReader = new StringReader(xmlString);
+
+            List<Order> productList = (List<Order>)serializer.Deserialize(stringReader);
+
+
+            foreach(Order o in productList.ToArray()) {
+                System.Console.WriteLine(o.CustomerName);
+            }
+
+            /* var node = cust.Elements().First(); */
+
+/*              (order)deserializer.ReadObject(cust.de);/ */
+
+/*     Serialization<Order>.DeserializeFromXmlFile(yourFileNameOrPath); */
+            
+            
+/*              XmlNode xmlNode = cust.Elements().First();
+
+ XmlSerializer serial = new XmlSerializer(typeof(SystemInfo));
+
+ SystemInfo syso =(SystemInfo)serial.Deserialize(new X mlNodeReader(xmlNode)); */
+
+            return new List<Order>();
         }
     }
 }
