@@ -40,6 +40,8 @@ namespace xml_presenter_webapp.Controllers
                 //combine files
                 source.AddRange(linesFromFile);  
             }
+
+            //convert tp xml
             string[] modifiedSource = source.Skip(8).ToArray();
             XElement cust = new System.Xml.Linq.XElement("Orders",  
                 from str in source  
@@ -59,12 +61,9 @@ namespace xml_presenter_webapp.Controllers
                 )  
             );
 
-
             //save xml to disk
             const string filePath = "db/orders.xml";
             cust.Save(filePath);
-
-            //var orders = Serialization<OrderDTO>.DeserializeFromXmlFile(filePath);
 
             //load xml from disk
             XmlDocument doc = new XmlDocument();
@@ -81,38 +80,13 @@ namespace xml_presenter_webapp.Controllers
             string xmlString = xmlstr.Substring(xmlTagLength, xmlstr.Length-xmlTagLength);
 
 
-
-           // System.Console.WriteLine(xmlstr);
-
-           // var xmlString = System.IO.File.ReadAllLines(filePath);
-
-            //string xmlString = "<Products><Product><Id>1</Id><Name>My XML product</Name></Product><Product><Id>2</Id><Name>My second product</Name></Product></Products>";
-
             XmlSerializer serializer = new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("Orders"));
 
             StringReader stringReader = new StringReader(xmlString);
 
-            List<Order> productList = (List<Order>)serializer.Deserialize(stringReader);
+            List<Order> orderList = (List<Order>)serializer.Deserialize(stringReader);
 
-
-            foreach(Order o in productList.ToArray()) {
-                System.Console.WriteLine(o.CustomerName);
-            }
-
-            /* var node = cust.Elements().First(); */
-
-/*              (order)deserializer.ReadObject(cust.de);/ */
-
-/*     Serialization<Order>.DeserializeFromXmlFile(yourFileNameOrPath); */
-            
-            
-/*              XmlNode xmlNode = cust.Elements().First();
-
- XmlSerializer serial = new XmlSerializer(typeof(SystemInfo));
-
- SystemInfo syso =(SystemInfo)serial.Deserialize(new X mlNodeReader(xmlNode)); */
-
-            return new List<Order>();
+            return orderList;
         }
     }
 }
