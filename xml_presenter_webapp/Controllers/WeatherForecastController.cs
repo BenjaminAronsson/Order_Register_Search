@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +14,17 @@ namespace xml_presenter_webapp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class Weatherforecast : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<Weatherforecast> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public Weatherforecast(ILogger<Weatherforecast> logger)
         {
             _logger = logger;
+            generateXml();
         }
-
-        [HttpGet]
-        public IEnumerable<Order> Get()
-        {
+        const string filePath = "db/orders.xml";
+        private void generateXml() {
             //find files
             string[] txtfiles = Directory.GetFiles("db", "*.txt");
             
@@ -47,7 +47,7 @@ namespace xml_presenter_webapp.Controllers
                 from str in source  
                 let fields = str.Split('|')  
                 select new XElement("Order",  
-                    new XAttribute("OrderNumber", fields[1]),  
+                    new XElement("OrderNumber", fields[1]),  
                     new XElement("OrderLineNumber", fields[2]),  
                     new XElement("ProductNumber", fields[3]),  
                     new XElement("Quantity", fields[4]),  
@@ -62,8 +62,13 @@ namespace xml_presenter_webapp.Controllers
             );
 
             //save xml to disk
-            const string filePath = "db/orders.xml";
             cust.Save(filePath);
+        }
+
+        [HttpGet]
+        public IEnumerable<Order> Get()
+        {
+            
 
             //load xml from disk
             XmlDocument doc = new XmlDocument();
@@ -79,14 +84,13 @@ namespace xml_presenter_webapp.Controllers
             const int xmlTagLength = 38;
             string xmlString = xmlstr.Substring(xmlTagLength, xmlstr.Length-xmlTagLength);
 
-
             XmlSerializer serializer = new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("Orders"));
 
             StringReader stringReader = new StringReader(xmlString);
 
             List<Order> orderList = (List<Order>)serializer.Deserialize(stringReader);
 
-            return orderList;
+            return orderList; //.Find(o => o.OrderNumber == orderId);
         }
     }
 }

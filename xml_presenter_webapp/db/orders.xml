@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Orders>
-  <Order OrderNumber="17890">
+  <Order>
+    <OrderNumber>17890</OrderNumber>
     <OrderLineNumber>0001</OrderLineNumber>
     <ProductNumber>123451324A</ProductNumber>
     <Quantity>1</Quantity>
@@ -12,7 +13,8 @@
     <CustomerName>Daniel Johansson</CustomerName>
     <CustomerNumber>737268</CustomerNumber>
   </Order>
-  <Order OrderNumber="17890">
+  <Order>
+    <OrderNumber>17890</OrderNumber>
     <OrderLineNumber>0002</OrderLineNumber>
     <ProductNumber>4000-AAA</ProductNumber>
     <Quantity>2</Quantity>
@@ -24,7 +26,8 @@
     <CustomerName>Daniel Johansson</CustomerName>
     <CustomerNumber>737268</CustomerNumber>
   </Order>
-  <Order OrderNumber="17890">
+  <Order>
+    <OrderNumber>17890</OrderNumber>
     <OrderLineNumber>0003</OrderLineNumber>
     <ProductNumber>4000-BAA</ProductNumber>
     <Quantity>2</Quantity>
@@ -36,7 +39,8 @@
     <CustomerName>Daniel Johansson</CustomerName>
     <CustomerNumber>737268</CustomerNumber>
   </Order>
-  <Order OrderNumber="17890">
+  <Order>
+    <OrderNumber>17890</OrderNumber>
     <OrderLineNumber>0004</OrderLineNumber>
     <ProductNumber>4000-CAA</ProductNumber>
     <Quantity>8</Quantity>
@@ -48,7 +52,8 @@
     <CustomerName>Daniel Johansson</CustomerName>
     <CustomerNumber>737268</CustomerNumber>
   </Order>
-  <Order OrderNumber="17835">
+  <Order>
+    <OrderNumber>17835</OrderNumber>
     <OrderLineNumber>0001</OrderLineNumber>
     <ProductNumber>123-100</ProductNumber>
     <Quantity>75</Quantity>
@@ -60,7 +65,8 @@
     <CustomerName>Kalle Svensson</CustomerName>
     <CustomerNumber>265849</CustomerNumber>
   </Order>
-  <Order OrderNumber="17835">
+  <Order>
+    <OrderNumber>17835</OrderNumber>
     <OrderLineNumber>0002</OrderLineNumber>
     <ProductNumber>5000-AAA</ProductNumber>
     <Quantity>1</Quantity>
@@ -72,7 +78,8 @@
     <CustomerName>Kalle Svensson</CustomerName>
     <CustomerNumber>265849</CustomerNumber>
   </Order>
-  <Order OrderNumber="17835">
+  <Order>
+    <OrderNumber>17835</OrderNumber>
     <OrderLineNumber>0003</OrderLineNumber>
     <ProductNumber>5000-AAB</ProductNumber>
     <Quantity>1</Quantity>
@@ -84,7 +91,8 @@
     <CustomerName>Kalle Svensson</CustomerName>
     <CustomerNumber>265849</CustomerNumber>
   </Order>
-  <Order OrderNumber="17835">
+  <Order>
+    <OrderNumber>17835</OrderNumber>
     <OrderLineNumber>0004</OrderLineNumber>
     <ProductNumber>5000-AAC</ProductNumber>
     <Quantity>1</Quantity>
@@ -96,7 +104,8 @@
     <CustomerName>Kalle Svensson</CustomerName>
     <CustomerNumber>265849</CustomerNumber>
   </Order>
-  <Order OrderNumber="17835">
+  <Order>
+    <OrderNumber>17835</OrderNumber>
     <OrderLineNumber>0005</OrderLineNumber>
     <ProductNumber>5000-AAD</ProductNumber>
     <Quantity>1</Quantity>
@@ -108,7 +117,8 @@
     <CustomerName>Kalle Svensson</CustomerName>
     <CustomerNumber>265849</CustomerNumber>
   </Order>
-  <Order OrderNumber="17642">
+  <Order>
+    <OrderNumber>17642</OrderNumber>
     <OrderLineNumber>0001</OrderLineNumber>
     <ProductNumber>2000-19</ProductNumber>
     <Quantity>1</Quantity>
@@ -120,7 +130,8 @@
     <CustomerName>Per Andersson</CustomerName>
     <CustomerNumber>658254</CustomerNumber>
   </Order>
-  <Order OrderNumber="17642">
+  <Order>
+    <OrderNumber>17642</OrderNumber>
     <OrderLineNumber>0002</OrderLineNumber>
     <ProductNumber>1000-1</ProductNumber>
     <Quantity>2</Quantity>
@@ -132,7 +143,8 @@
     <CustomerName>Per Andersson</CustomerName>
     <CustomerNumber>658254</CustomerNumber>
   </Order>
-  <Order OrderNumber="17642">
+  <Order>
+    <OrderNumber>17642</OrderNumber>
     <OrderLineNumber>0003</OrderLineNumber>
     <ProductNumber>1000-2</ProductNumber>
     <Quantity>5</Quantity>
@@ -144,7 +156,8 @@
     <CustomerName>Per Andersson</CustomerName>
     <CustomerNumber>658254</CustomerNumber>
   </Order>
-  <Order OrderNumber="17642">
+  <Order>
+    <OrderNumber>17642</OrderNumber>
     <OrderLineNumber>0004</OrderLineNumber>
     <ProductNumber>A145</ProductNumber>
     <Quantity>5</Quantity>
@@ -156,7 +169,8 @@
     <CustomerName>Per Andersson</CustomerName>
     <CustomerNumber>658254</CustomerNumber>
   </Order>
-  <Order OrderNumber="17642">
+  <Order>
+    <OrderNumber>17642</OrderNumber>
     <OrderLineNumber>0005</OrderLineNumber>
     <ProductNumber>A167</ProductNumber>
     <Quantity>3</Quantity>
