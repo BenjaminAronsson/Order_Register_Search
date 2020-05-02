@@ -16,4 +16,15 @@
  <h1>Search by order number</h1>
  <input (keyup)="onKey($event)">
  <button (click)="fetchOrder()">Find Order</button>
- <p>{{order}}</p>
+ <div *ngIf="order" >
+  <h1>{{order.orderNumber}}</h1>
+  <h2>Customer: {{order.customerName}}</h2>
+  <p>Heroes:</p>
+  <!-- <ul>
+    <li *ngFor="let hero of heroes">
+      {{ hero.name }}
+      </li>
+  </ul> -->
+  <!-- <p *ngIf="heroes.length > 3">There are many heroes!</p> -->
+ </div>
+ <p *ngIf="!order">We could not found your order in our system. Please make sure you entered the right order number.</p>

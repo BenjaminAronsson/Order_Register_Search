@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Concurrent;
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,17 +15,19 @@ namespace xml_presenter_webapp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Weatherforecast : ControllerBase
+    public class OrderController : ControllerBase
     {
-        private readonly ILogger<Weatherforecast> _logger;
+        private readonly ILogger<OrderController> _logger;
 
-        public Weatherforecast(ILogger<Weatherforecast> logger)
+        public OrderController(ILogger<OrderController> logger)
         {
             _logger = logger;
             generateXml();
         }
         const string filePath = "db/orders.xml";
         private void generateXml() {
+            
+
             //find files
             string[] txtfiles = Directory.GetFiles("db", "*.txt");
             
@@ -61,15 +64,17 @@ namespace xml_presenter_webapp.Controllers
                 )  
             );
 
-            //save xml to disk
-            cust.Save(filePath);
+            //avoid making duplicates
+            if (!System.IO.File.Exists(filePath)) {
+                 //save xml to disk
+                cust.Save(filePath);
+            }
         }
 
         [HttpGet]
         public IEnumerable<Order> Get()
         {
             
-
             //load xml from disk
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);
@@ -84,13 +89,60 @@ namespace xml_presenter_webapp.Controllers
             const int xmlTagLength = 38;
             string xmlString = xmlstr.Substring(xmlTagLength, xmlstr.Length-xmlTagLength);
 
+            // create instances
             XmlSerializer serializer = new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("Orders"));
-
             StringReader stringReader = new StringReader(xmlString);
-
             List<Order> orderList = (List<Order>)serializer.Deserialize(stringReader);
 
-            return orderList; //.Find(o => o.OrderNumber == orderId);
+            // using (var reader = new StringReader(xmlString))
+            // {
+            //     var obj = (List<OrderDTO>)new XmlSerializer(typeof(List<OrderDTO>), new XmlRootAttribute("Orders")).Deserialize(reader);
+            //     System.Console.WriteLine(obj);
+            //     foreach(var file in obj)
+            //     {
+            //         Console.WriteLine($"{file.CustomerName}, {file.Name}");
+            //     }
+            // }
+
+            System.Console.WriteLine("total of " + orderList.Count() + " orders.");
+
+            return orderList;
+        }
+    
+        [HttpGet("orderid/{orderId}")]
+        public OrderDTO GetOrder([FromRoute]string orderId) {
+            var allOrders = this.Get();
+            System.Console.WriteLine("fetching order: " + orderId);
+            var selectedOrder = allOrders.Where((order) => order.OrderNumber == orderId);
+    
+            if(selectedOrder.Count() > 0) {
+                var order = new OrderDTO();
+                var info = selectedOrder.First();
+                order.CustomerName = info.CustomerName;
+                order.CustomerNumber = info.CustomerNumber;
+                order.OrderNumber = info.OrderNumber;
+                order.OrderDate = info.OrderDate;
+
+                foreach(Order orderDTO in selectedOrder) {
+                    var product = new Product();
+
+                    product.Name = orderDTO.Name; 
+                    product.OrderLineNumber = orderDTO.Name; 
+                    product.Quantity = orderDTO.Quantity; 
+                    product.ProductGroup = orderDTO.ProductGroup; 
+                    product.ProductNumber = orderDTO.ProductNumber; 
+                    product.Price = orderDTO.Price; 
+                    product.Description = orderDTO.Description; 
+
+                    order.Products.Append(product);
+                }
+
+
+                return order;
+            } else {
+                return null;
+            }
         }
     }
+
 }

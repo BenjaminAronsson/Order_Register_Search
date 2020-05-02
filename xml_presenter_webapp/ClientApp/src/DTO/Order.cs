@@ -1,9 +1,13 @@
+using System.Xml;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace xml_presenter_webapp
 {
+    [Serializable]
+    [XmlRootAttribute("Order")]
     public class Order
     { 
         public string OrderNumber { get; set; }
