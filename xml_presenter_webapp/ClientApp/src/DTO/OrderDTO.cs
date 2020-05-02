@@ -11,10 +11,10 @@ namespace xml_presenter_webapp
         public string CustomerName { get; set; }
         public string CustomerNumber { get; set; }
 
-        public IEnumerable<Product> Products { get; set;}
+        public List<Product> Products { get; set;}
 
         public OrderDTO() {
-            this.Products = new List<Product>().ToArray();
+            this.Products = new List<Product>();
         }
     }   
 }                

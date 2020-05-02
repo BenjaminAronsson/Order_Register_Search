@@ -94,18 +94,6 @@ namespace xml_presenter_webapp.Controllers
             StringReader stringReader = new StringReader(xmlString);
             List<Order> orderList = (List<Order>)serializer.Deserialize(stringReader);
 
-            // using (var reader = new StringReader(xmlString))
-            // {
-            //     var obj = (List<OrderDTO>)new XmlSerializer(typeof(List<OrderDTO>), new XmlRootAttribute("Orders")).Deserialize(reader);
-            //     System.Console.WriteLine(obj);
-            //     foreach(var file in obj)
-            //     {
-            //         Console.WriteLine($"{file.CustomerName}, {file.Name}");
-            //     }
-            // }
-
-            System.Console.WriteLine("total of " + orderList.Count() + " orders.");
-
             return orderList;
         }
     
@@ -122,21 +110,24 @@ namespace xml_presenter_webapp.Controllers
                 order.CustomerNumber = info.CustomerNumber;
                 order.OrderNumber = info.OrderNumber;
                 order.OrderDate = info.OrderDate;
-
+                 
+                System.Console.WriteLine(selectedOrder.Count());
                 foreach(Order orderDTO in selectedOrder) {
                     var product = new Product();
 
                     product.Name = orderDTO.Name; 
-                    product.OrderLineNumber = orderDTO.Name; 
+                    product.OrderLineNumber = orderDTO.OrderLineNumber; 
                     product.Quantity = orderDTO.Quantity; 
                     product.ProductGroup = orderDTO.ProductGroup; 
                     product.ProductNumber = orderDTO.ProductNumber; 
                     product.Price = orderDTO.Price; 
                     product.Description = orderDTO.Description; 
 
-                    order.Products.Append(product);
+                    order.Products.Add(product);
                 }
+                 
 
+                System.Console.WriteLine(order.Products.Count());
 
                 return order;
             } else {
