@@ -1,40 +1,41 @@
 
- <div *ngIf="!order" class="container .bg-primary">
-   <h2>Search by order number</h2>
-   <input (keyup)="onKey($event)">
+ <div class="container">
+   <h2>Search for order</h2>
+   <input (keyup)="onKey($event)" placeholder="Order number">
    <button (click)="fetchOrder()">Find Order</button>
  </div>
+ 
+ 
  <div *ngIf="order">
  <h2>Search by order number</h2>
- <input (keyup)="onKey($event)">
- <button (click)="fetchOrder()">Find Order</button>
   <h3>Order number: {{order.orderNumber}}</h3>
+  <h3>Order date: {{order.orderDate}}</h3>
   <h3>Customer: {{order.customerName}}</h3>
-  <table class='table table-striped .table-responsive{-sm|-md|-lg|-xl}.' aria-labelledby="tableLabel">
-    <thead>
-      <tr>
-        <th>Orderline</th>
-        <th>ProductNumber</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of order.products">
-        <td>{{ product.orderLineNumber }}</td>
-        <td>{{ product.productNumber }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.productGroup }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.quantity }}</td>
-        <td>{{ product.quantity * product.price }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <!-- <p *ngIf="heroes.length > 3">There are many heroes!</p> -->
+  <div style="overflow-x:auto;">
+    <table class='table table-striped .table-responsive{-sm|-md|-lg|-xl}.' aria-labelledby="tableLabel">
+      <thead>
+        <tr>
+          <th>Orderline</th>
+          <th>ProductNumber</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of order.products">
+          <td>{{ product.orderLineNumber }}</td>
+          <td>{{ product.productNumber }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.productGroup }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.quantity * product.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
  </div>
- <p *ngIf="showError">We could not found your order in our system. Please make sure you entered the right order number.</p>
+ <p *ngIf="showError" class="error">We could not found your order in our system. Please make sure you entered the right order number.</p>

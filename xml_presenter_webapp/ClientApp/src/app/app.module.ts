@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FetchDataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -24,7 +22,6 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'order-history', component: FetchDataComponent },
     ])
   ],
   providers: [],

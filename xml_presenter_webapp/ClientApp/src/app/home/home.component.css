@@ -1,9 +1,63 @@
-html, body {height: 100%;}
+html, body {min-height: 100%;}
 
 .container {
   min-height: 100% !important;
   overflow: hidden;
-  background-color: aqua;
   width: 100%;
+  background-color: darkorchid;
+  margin: 0;
+  padding: 3rem;
+}
 
+.error {
+  color: darkred;
+  font-size: xx-large;
+  margin-top: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+h2 {
+  color: white;
+  font-size: medium;
+}
+
+button {
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+}
+
+input {
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  h2 {
+    font-size: 6vw;
+  }
+  
+  h3 {
+    font-size: 4vw;
+  }
+  
+  input {
+    width: 65vw;
+  }
+  
+  button {
+    width: 65vw;
+  }
 }
