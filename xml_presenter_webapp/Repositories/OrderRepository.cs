@@ -1,15 +1,10 @@
-using System.Collections.Concurrent;
-using System.Collections;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+
 
 namespace xml_presenter_webapp
 {
@@ -18,7 +13,7 @@ namespace xml_presenter_webapp
 
         private const string filePath = "db/orders.xml";
 
-        static public OrderDTO GetOrderWithId(string orderId) {
+        public static OrderDTO GetOrderWithId(string orderId) {
               var allOrders = GetAllOrders();
             System.Console.WriteLine("fetching order: " + orderId);
             var selectedOrder = allOrders.Where((order) => order.OrderNumber == orderId);
@@ -52,7 +47,7 @@ namespace xml_presenter_webapp
             }
         }
 
-        public static List<Order> GetAllOrders() {
+        private static List<Order> GetAllOrders() {
             //load xml from disk
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);

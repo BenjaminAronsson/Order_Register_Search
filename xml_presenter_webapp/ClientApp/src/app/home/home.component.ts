@@ -33,7 +33,6 @@ export class HomeComponent {
     }
     //fetching specific order
     this.http.get<Order>(this.baseUrl + 'order/orderid/' + this.orderNumber).subscribe(result => {
-      console.log(result);
       this.order = result;
       this.showError = result == null;
     }, error => console.error(error));

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace xml_presenter_webapp.Controllers
@@ -17,16 +13,6 @@ namespace xml_presenter_webapp.Controllers
         {
             _logger = logger;
             OrderRepository.generateXml();
-        }
-     
-        
-
-        [HttpGet]
-        public IEnumerable<Order> Get()
-        {
-            
-            var orderList = OrderRepository.GetAllOrders();
-            return orderList;
         }
     
         [HttpGet("orderid/{orderId}")]
