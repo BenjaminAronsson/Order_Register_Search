@@ -26,7 +26,6 @@ namespace xml_presenter_webapp
                 order.OrderNumber = info.OrderNumber;
                 order.OrderDate = info.OrderDate;
                  
-                System.Console.WriteLine(selectedOrder.Count());
                 foreach(Order orderDTO in selectedOrder) {
                     var product = new Product();
 
@@ -56,11 +55,7 @@ namespace xml_presenter_webapp
             StringWriter sw = new StringWriter();
             XmlTextWriter tx = new XmlTextWriter(sw);
             doc.WriteTo(tx);
-
-            //remove xml tag
-            string xmlstr = sw.ToString();
-            const int xmlTagLength = 38;
-            string xmlString = xmlstr.Substring(xmlTagLength, xmlstr.Length-xmlTagLength);
+            string xmlString = sw.ToString();
 
             // create instances
             XmlSerializer serializer = new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("Orders"));
