@@ -1,0 +1,9 @@
+html, body {height: 100%;}
+
+.container {
+  min-height: 100% !important;
+  overflow: hidden;
+  background-color: aqua;
+  width: 100%;
+
+}
